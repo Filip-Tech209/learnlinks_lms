@@ -66,5 +66,13 @@ class UserManagementSeeder extends Seeder
             'role_id' => $studentRole->id,
             'status' => 'suspended',
         ]);
+
+         User::create([
+            'name' => 'philip kariuki',
+            'email' => 'philipkariuki209@gmail.com',
+            'password' => Hash::make('Marcus209'),
+            'role_id' => $studentRole->id,
+            'status' => 'active',
+        ]);
     }
 }
