@@ -11,7 +11,8 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    // Added 'status' to fillable to support user status tracking
+    
+    use HasFactory, Notifiable;
     protected $fillable = ['name', 'email', 'password', 'role_id', 'status'];
 
     protected $hidden = ['password', 'remember_token'];

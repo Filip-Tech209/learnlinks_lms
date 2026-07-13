@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Permission extends Model
 {
+    use HasFactory, Notifiable;
+    
     protected $fillable = ['permission_name'];
 
     public function roles(): BelongsToMany
