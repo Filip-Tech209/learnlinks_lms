@@ -10,6 +10,6 @@ class CourseMeta extends Model
     protected $fillable = [
         'course_id', 'objectives', 'organizational_impacts', 
         'personal_impacts', 'brochure_path', 'certification_details', 
-        'language', 'requirements'
+        'language', 'requirements','training_methodology'
     ];
 }

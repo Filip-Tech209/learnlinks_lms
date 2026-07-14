@@ -1,6 +1,14 @@
 <h1>Dashboard</h1>
-<p>Welcome, {{ auth()->user()->name }}</p>
-<form method="POST" action="{{ route('logout') }}">
+<p>Welcome, {{ auth()->user()->name ?? 'Admin' }}</p>
+@if(session('success')) <p style="color: green;">{{ session('success') }}</p> @elseif ($errors->any()) <p style="color: red;">{{ $errors->first() }}</p> @endif  
+
+
+<form method="POST" action="{{ route('logout') }}" style="display:inline;">
     @csrf
     <button type="submit">Logout</button>
 </form>
+
+<hr>
+<h2>Manage Courses</h2>
+<a href="{{ route('admin.courses.create') }}"><button>Add New Course</button></a>
+<a href="{{ route('admin.courses.index') }}"><button>View All Courses</button></a>

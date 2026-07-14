@@ -3,6 +3,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Password;
+use App\Http\Controllers\Admin\CourseController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -39,4 +40,14 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
+// Route::middleware(['auth', 'permission:manage_users'])->prefix('admin')->name('admin.')->group(function () {
+//     Route::resource('courses', \App\Http\Controllers\Admin\CourseController::class);
+// });
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
+// Course Management Routes (Protected by auth)
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+    Route::resource('courses', CourseController::class);
+});

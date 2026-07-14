@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('brochure_path')->nullable();
             $table->text('certification_details')->nullable();
             $table->string('language')->default('English');
+            $table->text('training_methodology')->nullable();
             $table->text('requirements')->nullable();
             $table->timestamps();
         });

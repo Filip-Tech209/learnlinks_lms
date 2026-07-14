@@ -17,6 +17,10 @@ class CourseManagementSeeder extends Seeder
                 'name' => 'Data Collection & Analytics',
                 'slug' => Str::slug('Data Collection & Analytics')
             ]);
+            $category = CourseCategory::create([
+                'name' => 'Information Commnunication Technology',
+                'slug' => Str::slug('ICT')
+            ]);
 
             // 2. Create Course
             $course = Course::create([
@@ -38,6 +42,7 @@ class CourseManagementSeeder extends Seeder
                 'brochure_path' => 'brochures/odk-course.pdf',
                 'certification_details' => 'Professional Certificate of Completion issued.',
                 'language' => 'English',
+                'training_methodology' => 'Hands-on practical sessions, group discussions, and real-world case studies.',
                 'requirements' => 'Laptop with at least 8GB RAM.'
             ]);
 
