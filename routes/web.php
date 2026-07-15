@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Password;
 use App\Http\Controllers\Admin\CourseController;
+use App\Http\Controllers\Admin\StudentController;
+use App\Http\Controllers\InstructorController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -50,4 +53,15 @@ Route::get('/dashboard', function () {
 // Course Management Routes (Protected by auth)
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     Route::resource('courses', CourseController::class);
+    Route::resource('students', StudentController::class);
+});
+
+    Route::resource('instructors', InstructorController::class);
+
+Route::get('/debug-view', function() {
+    $path = resource_path('views/instructors/create.blade.php');
+    return [
+        'Checked Path' => $path,
+        'File Exists?' => file_exists($path) ? 'YES! ✅' : 'NO! ❌'
+    ];
 });

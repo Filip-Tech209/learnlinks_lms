@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserManagementSeeder::class,
             CourseManagementSeeder::class,
+            StudentManagementSeeder::class,
         ]);
     }
 }
