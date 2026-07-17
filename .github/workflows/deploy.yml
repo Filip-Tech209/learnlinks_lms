@@ -3,7 +3,7 @@ name: Deploy Laravel App
 on:
   push:
     branches:
-      - main # Triggers the script whenever you push to the main branch
+      - main
 
 jobs:
   deploy:
@@ -16,39 +16,24 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2' # Match this to your HostPinnacle PHP version
+          php-version: '8.2'
           extensions: mbstring, xml, ctype, iconv, mysqlnd
 
       - name: Install Composer Dependencies
         run: |
           composer install --no-dev --optimize-autoloader --no-ansi --no-interaction --no-progress
 
-      - name: Deploy Files via Rsync over SSH
-        uses: AEnterprise/rsync-deploy@v1.0.2
-        env:
-          DEPLOY_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          ARGS: "-avzr --delete --exclude='.git*' --exclude='node_modules' --exclude='storage/logs/*' --exclude='.env'"
-          SERVER_PORT: "2222" # HostPinnacle typically uses port 2222 for SSH. Change to 22 if they use standard.
-          FOLDER: "./"
-          SERVER_IP: ${{ secrets.SERVER_HOST }}
-          # Replace 'cpanelusername' with your actual HostPinnacle cPanel username below:
-          USERNAME: "samkevsa" 
-          SERVER_DESTINATION: "/home/samkevsa/public_html/drdmedia.site/"
-
-      - name: Execute Remote SSH Commands (Laravel Optimization)
-        uses: appleboy/ssh-action@v1.0.3
+      # Safe, firewall-friendly FTP deployment
+      - name: Deploy Files via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          host: ${{ secrets.SERVER_HOST }}
-          # Replace 'cpanelusername' with your actual HostPinnacle cPanel username below:
-          username: "samkevsa"
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          passphrase: ${{ secrets.SSH_PASSPHRASE }}
-          port: 2222 # Match the port used above
-          script: |
-            cd /home/samkevsa/public_html/drdmedia.site
-            php artisan down
-            php artisan migrate --force
-            php artisan config:cache
-            php artisan route:cache
-            php artisan view:cache
-            php artisan up
+          server: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: public_html/drdmedia.site/
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/storage/logs/**
+            .env
