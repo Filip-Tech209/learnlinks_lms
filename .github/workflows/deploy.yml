@@ -10,8 +10,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Upgraded to v5 to natively support Node 24 and eliminate the deprecation error
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -23,9 +24,9 @@ jobs:
         run: |
           composer install --no-dev --optimize-autoloader --no-ansi --no-interaction --no-progress
 
-      # Safe, firewall-friendly FTP deployment
+      # Upgraded to v4.4.1 which resolves the Node 24 runtime deprecation
       - name: Deploy Files via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.1
         with:
           server: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.FTP_USERNAME }}
