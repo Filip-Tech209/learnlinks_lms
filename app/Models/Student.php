@@ -16,11 +16,11 @@ class Student extends Model
         'email',
         'phone',
         'status',
-        'enrollment_date',
+        'admission_date',
     ];
 
     protected $casts = [
-        'enrollment_date' => 'date',
+        'admission_date' => 'date',
     ];
 
     // Read-only accessor for clean UI output
@@ -38,5 +38,16 @@ class Student extends Model
     public function emergencyContacts()
     {
         return $this->hasMany(EmergencyContact::class);
+    }
+
+    public function enrollments()
+    {
+        return $this->hasMany(Enrollment::class);
+    }
+
+    // Shortcut to access all certificates through enrollments
+    public function certificates()
+    {
+        return $this->hasManyThrough(Certificate::class, Enrollment::class);
     }
 }

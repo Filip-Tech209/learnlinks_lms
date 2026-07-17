@@ -1,0 +1,367 @@
+/* =========================================================
+   COMPACT COURSE CREATION SYSTEM (Dedicated & Ultra-Dense)
+   ========================================================= */
+
+:root {
+    --primary-blue: #033b66;
+    --primary-blue-hover: #043571;
+    --accent-green: #a80027; /* Deep Accent Red */
+    --accent-green-hover: #8a001c;
+    --bg-light-blue: #f4f7fc;
+    --text-main: #111827;
+    --text-muted: #6b7280;
+    --border-color: #e5e7eb;
+    --card-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+/* Back Link Row */
+.back-btn-row {
+    margin-bottom: 8px;
+}
+
+/* Page Header */
+.form-header-group {
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.form-header-group h2 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.form-header-group p {
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+/* Ultra-Compact Form Sections */
+.form-section {
+    /* background-color: #ffffff; */
+    border: 1px solid #043571;
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 12px;
+    box-shadow: var(--card-shadow);
+}
+
+.form-section-header {
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 6px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.section-title-left {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.form-section-header h3 {
+    font-size: 11.5px;
+    font-weight: 700;
+    color: var(--primary-blue);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.form-section-header .section-number {
+    background-color: var(--primary-blue);
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 700;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Multi-Column High Density Grids */
+.form-grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
+
+.form-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+
+.form-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+}
+
+/* Compact Groups */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.form-group.span-2 {
+    grid-column: span 2;
+}
+
+.form-group.span-3 {
+    grid-column: span 3;
+}
+
+.form-group.span-4 {
+    grid-column: span 4;
+}
+
+.form-group label {
+    font-size: 10.5px;
+    font-weight: 600;
+    color: #4b5563;
+}
+
+/* Tight Input Controls */
+.input-control {
+    width: 100%;
+    padding: 5px 8px;
+    font-size: 11.5px;
+    /* border: 1px solid var(--border-color); */
+        border: 1px solid #afafaf;
+    border-radius: 4px;
+    outline: none;
+    background-color: #f4f7fc;
+    height: 28px;
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.input-control:focus {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 2px rgba(3, 59, 102, 0.08);
+}
+
+textarea.input-control {
+    resize: vertical;
+    min-height: 42px;
+    height: 42px;
+    font-family: inherit;
+}
+
+/* Horizontal Row Systems for Dynamic Forms (Modules & Schedules) */
+.dynamic-row-container {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.dynamic-row-header {
+    display: grid;
+    grid-template-columns: 40px 1.5fr 2.5fr 80px;
+    gap: 8px;
+    padding: 0 4px;
+    font-weight: 700;
+    font-size: 10px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+.dynamic-row-header.schedule-header {
+    grid-template-columns: 1fr 1.2fr 1.2fr 1fr 80px;
+}
+
+.dynamic-item-row {
+    display: grid;
+    grid-template-columns: 40px 1.5fr 2.5fr 80px;
+    gap: 8px;
+    align-items: center;
+    background-color: var(--bg-light-blue);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 4px 8px;
+}
+
+.dynamic-item-row.schedule-row {
+    grid-template-columns: 1fr 1.2fr 1.2fr 1fr 80px;
+}
+
+.row-index {
+    font-weight: 700;
+    color: var(--primary-blue);
+    text-align: center;
+    font-size: 11px;
+}
+
+/* Dynamic Panel Action Controls */
+.btn-add-compact {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 8px;
+    background-color: #043571;
+    border: 1px dashed var(--primary-blue);
+    color: #f9fafb;
+    font-size: 11.5px;
+    font-weight: 700;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.1s ease-in-out;
+}
+
+.btn-add-compact:hover {
+    background-color: var(--primary-blue);
+    color: #ffffff;
+    border-style: solid;
+}
+
+.btn-remove-compact {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 28px;
+    width: 100%;
+    background-color: #fef2f2;
+    border: 1px solid #fee2e2;
+    color: var(--accent-green);
+    font-size: 10.5px;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.1s;
+}
+
+.btn-remove-compact:hover {
+    background-color: var(--accent-green);
+    color: #ffffff;
+    border-color: var(--accent-green);
+}
+
+/* Actions Bottom Row */
+.form-submit-row {
+    border-top: 1px solid var(--border-color);
+    padding-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+/* =========================================================
+   SIDEBAR COLLAPSIBLE STYLES (Strict <= 400px Mobile Integration)
+   ========================================================= */
+.menu-toggle-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-main);
+    cursor: pointer;
+    padding: 8px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: background-color 0.2s;
+}
+
+.menu-toggle-btn:hover {
+    background-color: var(--bg-light-blue);
+}
+
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(17, 24, 39, 0.4);
+    z-index: 95;
+    backdrop-filter: blur(2px);
+    transition: opacity 0.3s ease;
+}
+
+/* Layout Adjustments for Medium Displays */
+@media (max-width: 900px) {
+    .form-grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .form-group.span-3, .form-group.span-4 {
+        grid-column: span 2;
+    }
+}
+
+/* Form Scaling on Tablet / Small Desktop */
+@media (max-width: 768px) {
+    .form-grid-3, .form-grid-2 {
+        grid-template-columns: 1fr;
+    }
+    .form-group.span-2, .form-group.span-3, .form-group.span-4 {
+        grid-column: span 1;
+    }
+    .dynamic-row-header {
+        display: none; /* Hide header grids on mobile */
+    }
+    .dynamic-item-row, .dynamic-item-row.schedule-row {
+        grid-template-columns: 1fr !important;
+        gap: 6px;
+        padding: 8px;
+    }
+    .row-index {
+        text-align: left;
+        border-bottom: 1px dashed var(--border-color);
+        padding-bottom: 4px;
+    }
+}
+
+/* Strictly Mobile Collapsing at 400px & Below */
+@media (max-width: 400px) {
+    .top-nav {
+        justify-content: space-between !important;
+        padding: 0 16px;
+    }
+
+    .menu-toggle-btn {
+        display: inline-flex;
+    }
+
+    .sidebar {
+        position: fixed !important;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 270px;
+        height: 100vh;
+        transform: translateX(-100%);
+        transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 100;
+        box-shadow: 4px 0 20px rgba(0, 0, 0, 0.15);
+        display: flex !important;
+        flex-direction: column !important;
+        border-right: 1px solid var(--border-color);
+    }
+
+    .sidebar-nav {
+        flex-direction: column !important;
+        overflow-x: visible !important;
+    }
+
+    .sidebar-footer {
+        display: flex !important;
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+    }
+
+    .sidebar-overlay.active {
+        display: block;
+    }
+
+    .main-content {
+        margin-left: 0 !important;
+    }
+}

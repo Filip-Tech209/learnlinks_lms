@@ -46,7 +46,7 @@
                     <td style="padding: 12px; font-weight: bold; color: #4a5568;">{{ $student->student_number }}</td>
                     <td style="padding: 12px;">{{ $student->full_name }}</td>
                     <td style="padding: 12px;">{{ $student->email }}</td>
-                    <td style="padding: 12px;">{{ $student->enrollment_date->format('M d, Y') }}</td>
+                    <td style="padding: 12px;">{{ $student->admission_date->format('M d, Y') }}</td>
                     <td style="padding: 12px;">
                         @if($student->status === 'active')
                             <span style="background: #d1e7dd; color: #0f5132; padding: 4px 8px; border-radius: 12px; font-size: 0.85em; font-weight: bold;">Active</span>

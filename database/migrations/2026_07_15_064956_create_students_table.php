@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('phone')->nullable();
             $table->enum('status', ['active', 'inactive', 'suspended'])->default('active');
-            $table->date('enrollment_date');
+            $table->date('admission_date');
             $table->timestamps();
 
             // Indexes for lightning-fast search on names and registration numbers

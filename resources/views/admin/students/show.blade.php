@@ -35,7 +35,7 @@
                 </p>
                 <p><strong>Email:</strong> <span style="word-break: break-all;">{{ $student->email }}</span></p>
                 <p><strong>Phone:</strong> {{ $student->phone ?? 'Not Provided' }}</p>
-                <p><strong>Enrolled:</strong> {{ $student->enrollment_date->format('M d, Y') }}</p>
+                <p><strong>Admitted:</strong> {{ $student->admission_date->format('M d, Y') }}</p>
             </div>
         </div>
 
@@ -95,6 +95,83 @@
                     <p style="color: #718096; font-style: italic; margin: 10px 0 0 0;">No emergency contacts configured.</p>
                 @endif
             </div>
+
+            <!-- Course Enrollment & Progress Panel -->
+            <div style="border: 1px solid #dee2e6; padding: 20px; border-radius: 6px; background: white; margin-top: 20px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #f1f5f9; padding-bottom: 8px; margin-bottom: 15px;">
+                    <h3 style="margin: 0; font-size: 1.15rem; color: #1e293b;">Active Enrollments & Progress</h3>
+                    <a href="{{ route('admin.students.enroll', $student->id) }}" style="text-decoration: none;">
+                        <button style="padding: 6px 12px; background: #2563eb; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; font-size: 0.85em;">
+                            + Enroll in Course
+                        </button>
+                    </a>
+                </div>
+
+                @if($student->enrollments->isNotEmpty())
+                    <div style="display: flex; flex-direction: column; gap: 15px;">
+                        @foreach($student->enrollments as $enrollment)
+                            <div style="border: 1px solid #e2e8f0; border-radius: 6px; padding: 15px; background: #f8fafc;">
+                                <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                                    <div>
+                                        <strong style="font-size: 1.1em; color: #0f172a;">{{ $enrollment->course->title }}</strong>
+                                        <div style="font-size: 0.85em; color: #64748b; margin-top: 3px;">
+                                            Enrolled On: 
+                                        </div>
+                                    </div>
+                                    <span style="background: {{ $enrollment->status === 'completed' ? '#d1e7dd' : '#eff6ff' }}; color: {{ $enrollment->status === 'completed' ? '#0f5132' : '#1e40af' }}; padding: 4px 10px; border-radius: 50px; font-size: 0.8em; font-weight: bold; text-transform: uppercase;">
+                                        {{ $enrollment->status }}
+                                    </span>
+                                </div>
+
+                                <!-- Progress Bar -->
+                                <div style="margin-top: 15px;">
+                                    <div style="display: flex; justify-content: space-between; font-size: 0.85em; margin-bottom: 5px;">
+                                        <span style="color: #475569; font-weight: 500;">Learning Track Completion</span>
+                                        <span style="font-weight: bold; color: #0f172a;">{{ $enrollment->progress_percent }}%</span>
+                                    </div>
+                                    <div style="width: 100%; height: 8px; background: #e2e8f0; border-radius: 10px; overflow: hidden;">
+                                        <div style="width: {{ $enrollment->progress_percent }}%; height: 100%; background: #16a34a; border-radius: 10px; transition: width 0.3s ease;"></div>
+                                    </div>
+                                </div>
+
+                                <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 15px; border-top: 1px solid #e2e8f0; padding-top: 12px;">
+                                    <a href="{{ route('admin.enrollments.progress', $enrollment->id) }}">
+                                        <button style="padding: 5px 12px; background: white; border: 1px solid #cbd5e1; color: #475569; border-radius: 4px; cursor: pointer; font-size: 0.85em;">
+                                            Track Modules
+                                        </button>
+                                    </a>
+
+                                    <!-- Certificate Action Trigger -->
+                                    @if($enrollment->progress_percent === 100)
+                                        @if($enrollment->certificate)
+                                            <a href="{{ route('admin.certificates.view', $enrollment->certificate->id) }}" target="_blank">
+                                                <button style="padding: 5px 12px; background: #16a34a; border: none; color: white; border-radius: 4px; cursor: pointer; font-size: 0.85em; font-weight: bold;">
+                                                    View Certificate
+                                                </button>
+                                            </a>
+                                        @else
+                                            <form action="{{ route('admin.enrollments.certificate.issue', $enrollment->id) }}" method="POST" style="display: inline-flex; gap: 5px; align-items: center;">
+                                                @csrf
+                                                <select name="grade" required style="padding: 4px; border-radius: 4px; border: 1px solid #cbd5e1; font-size: 0.85em;">
+                                                    <option value="Distinction">Distinction</option>
+                                                    <option value="Merit">Merit</option>
+                                                    <option value="Pass" selected>Pass</option>
+                                                </select>
+                                                <button type="submit" style="padding: 5px 12px; background: #2563eb; border: none; color: white; border-radius: 4px; cursor: pointer; font-size: 0.85em; font-weight: bold;">
+                                                    Issue Certificate
+                                                </button>
+                                            </form>
+                                        @endif
+                                    @endif
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                @else
+                    <p style="color: #64748b; font-style: italic; margin: 0; padding: 10px 0;">No active course tracks have been set for this student.</p>
+                @endif
+            </div>
+
         </div>
     </div>
 

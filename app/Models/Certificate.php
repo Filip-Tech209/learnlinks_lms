@@ -1,0 +1,20 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Certificate extends Model
+{
+    protected $fillable = [
+        'enrollment_id',
+        'certificate_number',
+        'issue_date',
+        'grade'
+    ];
+
+    public function enrollment()
+    {
+        return $this->belongsTo(Enrollment::class);
+    }
+}

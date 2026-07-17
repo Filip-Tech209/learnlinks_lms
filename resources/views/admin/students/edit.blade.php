@@ -61,8 +61,8 @@
                 </select>
             </div>
             <div style="flex: 1;">
-                <label style="font-weight:bold;">Enrollment Date:</label>
-                <input type="date" name="enrollment_date" value="{{ old('enrollment_date', $student->enrollment_date->format('Y-m-d')) }}" required style="width: 100%; box-sizing: border-box; padding: 8px;">
+                <label style="font-weight:bold;">Admission Date:</label>
+                <input type="date" name="admission_date" value="{{ old('admission_date', $student->admission_date->format('Y-m-d')) }}" required style="width: 100%; box-sizing: border-box; padding: 8px;">
             </div>
         </div>
 

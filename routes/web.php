@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Password;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\InstructorController;
+use App\Http\Controllers\Admin\AcademicController;
 
 
 Route::get('/', function () {
@@ -54,6 +55,16 @@ Route::get('/dashboard', function () {
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     Route::resource('courses', CourseController::class);
     Route::resource('students', StudentController::class);
+
+    // New Academic Lifecycle Routes
+    Route::get('students/{student}/enroll', [AcademicController::class, 'createEnrollment'])->name('students.enroll');
+    Route::post('students/{student}/enroll', [AcademicController::class, 'storeEnrollment'])->name('students.enroll.store');
+    
+    Route::get('enrollments/{enrollment}/progress', [AcademicController::class, 'manageProgress'])->name('enrollments.progress');
+    Route::post('enrollments/{enrollment}/progress', [AcademicController::class, 'updateProgress'])->name('enrollments.progress.update');
+    
+    Route::post('enrollments/{enrollment}/certificate', [AcademicController::class, 'issueCertificate'])->name('enrollments.certificate.issue');
+    Route::get('certificates/{certificate}', [AcademicController::class, 'viewCertificate'])->name('certificates.view');
 });
 
     Route::resource('instructors', InstructorController::class);
@@ -65,3 +76,7 @@ Route::get('/debug-view', function() {
         'File Exists?' => file_exists($path) ? 'YES! ✅' : 'NO! ❌'
     ];
 });
+
+
+
+    

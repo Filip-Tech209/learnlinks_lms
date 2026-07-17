@@ -86,7 +86,7 @@ class StudentController extends Controller
             'email' => 'required|email|unique:students,email,' . $student->id,
             'phone' => 'nullable|string|max:50',
             'status' => 'required|in:active,inactive,suspended',
-            'enrollment_date' => 'required|date',
+            'admission_date' => 'required|date',
             'details.date_of_birth' => 'nullable|date',
             'details.gender' => 'nullable|in:male,female,other,prefer_not_to_say',
             'details.address' => 'nullable|string',
